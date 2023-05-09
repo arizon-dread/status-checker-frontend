@@ -42,14 +42,11 @@
     margin: 0 16px;
   }
 
-  .toolbar #twitter-logo {
-    height: 40px;
-    margin: 0 8px;
+  .toolbar #logo:hover {
+    transform: scale(1.2);
   }
-
-  .toolbar #youtube-logo {
-    height: 40px;
-    margin: 0 16px;
+  .toolbar #github-logo:hover {
+    transform: scale(1.2);
   }
 
   .toolbar #twitter-logo:hover,
@@ -139,30 +136,22 @@
     margin-left: 60px;
   }
 
-  svg#rocket {
-    width: 80px;
-    position: absolute;
-    left: -10px;
-    top: -24px;
-  }
 
-  svg#rocket-smoke {
-    height: calc(100vh - 95px);
-    position: absolute;
-    top: 10px;
-    right: 180px;
-    z-index: -10;
-  }
 
   a,
   a:visited,
   a:hover {
-    color: #1976d2;
+    /**/
+    /* color: #1976d2; */
     text-decoration: none;
   }
 
-  a:hover {
-    color: #125699;
+  .nav-item:hover {
+    /* color: #125699; */
+    transform: scale(1.1);
+  }
+  .nav-item a {
+    color: white;
   }
 
   .terminal {
@@ -217,17 +206,26 @@
     transform: translateY(-0.25rem);
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
   }
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
 
-  footer {
-    margin-top: 8px;
-    display: flex;
-    align-items: center;
-    line-height: 20px;
+  footer,
+  .push {
+    /* display: flex;
+    align-items: center; */
+    height: 20px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 98%;
   }
 
   footer a {
-    display: flex;
-    align-items: center;
+    padding-left: 1rem;
+    font-size: xx-small;
+    color: grey;
   }
 
   .github-star-badge {
