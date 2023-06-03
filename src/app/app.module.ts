@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { SystemsComponent } from './systems/systems.component';
 import { SettingsComponent } from './settings/settings.component';
+import { SystemItemComponent } from './systems/system-item/system-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SystemsComponent,
-    SettingsComponent
+    SettingsComponent,
+    SystemItemComponent,
   ],
   imports: [
     BrowserModule,
