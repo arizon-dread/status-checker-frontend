@@ -26,9 +26,9 @@ describe('SystemItemComponent', () => {
   it('should display systemInput', () => {
     component.system = {
       "alertBody" : "Google went down",
-      "alertEmail" : "erik.j.svensson@gmail.com",
+      "alertEmail" : "test@test.com",
       "alertHasBeenSent" : false,
-      "alertUrl" : "https://hooks.slack.com/services/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",
+      "alertUrl" : "https://hooks.slack.com/services/",
       "callBody" : "",
       "callStatus" : "",
       "callUrl" : "https://google.com",
