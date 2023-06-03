@@ -102,6 +102,5 @@
         }
       }
     }
-  },
-  "defaultProject": "status-checker-frontend"
+  }
 }
