@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -7,7 +7,15 @@ import { SharedModule } from './shared/shared.module';
 import { SystemsComponent } from './systems/systems.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SystemItemComponent } from './systems/system-item/system-item.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ConfigService } from './services/config.service';
+import { HttpClient } from '@angular/common/http';
 
+export function appConfigInit(appConfigService: ConfigService) {
+  return () => {
+    return appConfigService.loadConfig()
+  };
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,9 +26,17 @@ import { SystemItemComponent } from './systems/system-item/system-item.component
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    FontAwesomeModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appConfigInit,
+      multi: true,
+      deps: [ConfigService, HttpClient]
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

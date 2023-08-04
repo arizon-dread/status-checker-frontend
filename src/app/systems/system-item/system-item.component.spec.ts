@@ -45,7 +45,8 @@ describe('SystemItemComponent', () => {
       "status" : ""
     }
     fixture.detectChanges();
-    var Item = fixture.debugElement.nativeElement.querySelector('name');
-    expect(Item.innerText).toBe("google");
+    const element: HTMLElement = fixture.nativeElement;
+    const name = element.querySelector('test-id');
+    expect(name?.innerHTML).toBe("google");
   })
 });

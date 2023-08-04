@@ -10,6 +10,7 @@ export class SystemsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }
