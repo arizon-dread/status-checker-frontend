@@ -9,14 +9,15 @@ export class ConfigService {
   constructor(private http: HttpClient) {}
   public apiBaseUrl: string = "";
   loadConfig(): Promise<any> {
-    const promise = this.http.get("/config/config.json").toPromise()
+    //const promise = 
+    return this.http.get("/config/config.json").toPromise()
         .then(data => {
           Object.assign(this, data)
           return data;
         });
 
 
-    return promise;
+    //return promise;
   }
   
 }
