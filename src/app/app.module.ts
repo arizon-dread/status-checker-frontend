@@ -1,6 +1,6 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
@@ -9,11 +9,14 @@ import { SettingsComponent } from './settings/settings.component';
 import { SystemItemComponent } from './systems/system-item/system-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ConfigService } from './services/config.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 
 export function appConfigInit(appConfigService: ConfigService) {
   return () => {
-    return appConfigService.loadConfig()
+    new Promise((resolve, reject) =>  {
+      appConfigService.loadConfig()
+    })
   };
 }
 @NgModule({
@@ -26,8 +29,14 @@ export function appConfigInit(appConfigService: ConfigService) {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     SharedModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    HttpClientModule,
+    ToastrModule.forRoot({
+      progressBar: true,
+      preventDuplicates: true
+    })
   ],
   providers: [
     {
