@@ -14,9 +14,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 export function appConfigInit(appConfigService: ConfigService) {
   return () => {
-    new Promise((resolve, reject) =>  {
-      resolve(appConfigService.loadConfig());
-    })
+    appConfigService.loadConfig();
   };
 }
 @NgModule({

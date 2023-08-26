@@ -11,11 +11,12 @@ import { catchError } from 'rxjs/operators';
 })
 export class SystemService {
 
-  constructor(private http: HttpClient, private cfgSvc: ConfigService, private errHandler: ErrorHandlerService) { }
+  constructor(private http: HttpClient, private errHandler: ErrorHandlerService) { }
 
   systems: SystemStatusResponse[] | undefined;
-  getSystems() : Observable<SystemStatusResponse[]>{
-    return this.http.get<SystemStatusResponse[]>(this.cfgSvc.config.apiBaseUrl + 'systemstatus')
+  getSystems() : Observable<SystemStatusResponse[]> {
+    console.log("config: "+ ConfigService.config.apiBaseUrl);
+    return this.http.get<SystemStatusResponse[]>(ConfigService.config.apiBaseUrl + '/systemstatus')
       .pipe(
         catchError(this.errHandler.handleError("getSystems", this.systems, "Unable to get systems from backend", true))
       );
