@@ -12,7 +12,7 @@ export class ConfigService {
 
   public static config: Config = {apiBaseUrl: ""};
 
-  loadConfig(): Promise<Config> {
+  loadConfig(): Observable<Config> {
     //const promise = 
     console.log("loading config..");
     // const confSub = this.http.get<Config>("/config/config.json").subscribe({
@@ -34,14 +34,15 @@ export class ConfigService {
     //   const config = this.http.get<Config>("/config/config.json").toPromise();
     // });
     
-    return this.http.get<Config>("/config/config.json").toPromise<Config>()
-        .then(data => {
-          ConfigService.config = data as Config;
-          console.log(ConfigService.config);
-          //Object.assign(this, data)
+    return this.http.get<Config>("/config/config.json")
+    //.toPromise<Config>()
+        // .then(data => {
+        //   ConfigService.config = data as Config;
+        //   console.log(ConfigService.config);
+        //   //Object.assign(this, data)
           
-          return Promise.resolve(data);
-        });
+        //   return data;//Promise.resolve(data);
+        // });
 
 
     //return promise;
