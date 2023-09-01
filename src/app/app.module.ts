@@ -11,18 +11,29 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ConfigService } from './services/config.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { EditModalComponent } from './systems/edit-modal/edit-modal.component';
 
-export function appConfigInit(appConfigService: ConfigService) {
-  return () => {
-    appConfigService.loadConfig();
-  };
-}
+// export function appConfigInit(appConfigService: ConfigService) {
+//   return () => {
+//     appConfigService.loadConfig();
+//   };
+// }
+function appConfigInit(appConfigService: ConfigService): () => Observable<any> {
+  return () => 
+    appConfigService.loadConfig()
+    .pipe(
+       tap(config => { ConfigService.config = config })
+    );
+ }
 @NgModule({
   declarations: [
     AppComponent,
     SystemsComponent,
     SettingsComponent,
     SystemItemComponent,
+    EditModalComponent,
   ],
   imports: [
     BrowserModule,
