@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SystemStatusResponse } from '../models/system-status-response';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 
@@ -9,7 +9,7 @@ import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 })
 export class SystemItemComponent implements OnInit {
 
-  system: SystemStatusResponse | undefined;
+  @Input() system: SystemStatusResponse | undefined;
   faCircleCheck = faCircleCheck;
   constructor() { }
 
