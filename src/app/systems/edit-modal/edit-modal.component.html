@@ -1,0 +1,144 @@
+
+<div class="card">
+    <div class="card-header">
+        Systems
+    </div>
+    <div class="card-body">
+        <div *ngFor="let system of systemResps">
+            <div class="row mb-2">
+                <div class="col-md-2">
+                    <label for="id">Id</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="id" formControlName="id" class="form-control"/>
+                </div>
+                <div class="col-md-2">
+                    <label for="name">Name<span class="danger">*</span></label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="name" formControlName="name" class="form-control"/>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-2">
+                    <label for="alertUrl">Alert URL</label>
+                </div>
+                <div class="col-md-3">
+                    <input id="alertUrl" formControlName="alertUrl" rows="3" maxlength="500" class="form-control"/>
+                </div>
+                <div class="col-md-2">
+                    <label for="alertEmail">Alert e-mail</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="email" id="alertEmail" formControlName="alertEmail"class="form-control" />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-2">
+                    <label for="alertBody">Alert body<span class="danger">*</span></label>
+                </div>
+                <div class="col-md-10">
+                    <textarea id="alertBody" formControlName="alertBody" rows="3" maxlength="500" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-2">
+                    <label for="callBody">Call body</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="callBody" formControlName="callBody" class="form-control"/>
+                </div>
+                <div class="col-md-2">
+                    <label for="callUrl">Call URL<span class="danger">*</span></label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="callUrl" formControlName="callUrl" class="form-control"/>
+                </div>
+            </div>
+            <div class="row mb-2" *ngIf="displayCert">
+                <div class="col-md-2">
+                    <label for="certExpirationDays">Cert expiration days</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="certExpirationDays" formControlName="certExpirationDays" class="form-control"/>
+                </div>
+                <div class="col-md-2">
+                    <label for="certStatus">Cert status</label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="certStatus" formControlName="certStatus" class="form-control"/>
+                </div>
+            </div>
+            <div class="row" *ngIf="">
+                <div class="col-md-3">
+                    <label for=""></label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="" formControlName="" />
+                </div>
+                <div class="col-md-3">
+                    <label for=""></label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="" formControlName="" />
+                </div>
+            </div>
+            <div class="row" *ngIf="">
+                <div class="col-md-3">
+                    <label for=""></label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="" formControlName="" />
+                </div>
+                <div class="col-md-3">
+                    <label for=""></label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="" formControlName="" />
+                </div>
+            </div>
+            <div class="row" *ngIf="">
+                <div class="col-md-3">
+                    <label for=""></label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="" formControlName="" />
+                </div>
+                <div class="col-md-3">
+                    <label for=""></label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="" formControlName="" />
+                </div>
+            </div>
+            <div class="row" *ngIf="">
+                <div class="col-md-3">
+                    <label for=""></label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="" formControlName="" />
+                </div>
+                <div class="col-md-3">
+                    <label for=""></label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="" formControlName="" />
+                </div>
+            </div>
+            <div class="row" *ngIf="">
+                <div class="col-md-3">
+                    <label for=""></label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="" formControlName="" />
+                </div>
+                <div class="col-md-3">
+                    <label for=""></label>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="" formControlName="" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
