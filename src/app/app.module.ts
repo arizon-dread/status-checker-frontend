@@ -15,11 +15,7 @@ import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { EditModalComponent } from './systems/edit-modal/edit-modal.component';
 
-// export function appConfigInit(appConfigService: ConfigService) {
-//   return () => {
-//     appConfigService.loadConfig();
-//   };
-// }
+
 function appConfigInit(appConfigService: ConfigService): () => Observable<any> {
   return () => 
     appConfigService.loadConfig()
