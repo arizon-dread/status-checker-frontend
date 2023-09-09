@@ -1,3 +1,4 @@
-<div class="row" *ngFor="let system of systemResps">
-    <app-system-item (system)="system"></app-system-item>
+<h2>Systems</h2>
+<div *ngFor="let system of systemResps">
+    <app-system-item [system]="system"></app-system-item>
 </div>

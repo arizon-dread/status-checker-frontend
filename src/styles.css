@@ -84,7 +84,9 @@
     max-width: 100%;
     overflow-x: hidden;
   }
-
+  label {
+    font-weight: bold;
+}
   footer,
   .push {
     /* display: flex;
