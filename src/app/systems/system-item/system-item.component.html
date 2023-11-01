@@ -1,10 +1,12 @@
 <div class="card mb-2">
     <div class="card-header row g-0">
         <div class="col-md-9">
-            {{system?.name}}
+            <h4>
+                {{system?.name}}
+            </h4>
         </div>
         
-        <div class="col-md-2 d-flex justify-content-md-end">
+        <div class="col-md-2 mt-1 d-flex justify-content-md-end">
             Status: &nbsp;<fa-icon [icon]="faCircleCheck" [class]="class" [title]="title"></fa-icon>
         </div>
         <div class="col-md-1 d-flex justify-content-md-end">
@@ -16,7 +18,7 @@
             <div class="col-md-1"><label for="name">Name:</label></div>
             <div test-id="name" id="name" class="col-md-3">{{system?.name}}</div>
             <div class="col-md-3"><label for="lastOK">Last successful check:</label></div>
-            <div id="lastOK" class="col-md-4">{{system?.lastOkTime}}</div>
+            <div id="lastOK" class="col-md-4" [class]="dateStyle">{{dateOrNeverCalled}}</div>
             
         </div>
     
