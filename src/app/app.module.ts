@@ -4,16 +4,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
-import { SystemsComponent } from './systems/systems.component';
 import { SettingsComponent } from './settings/settings.component';
-import { SystemItemComponent } from './systems/system-item/system-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ConfigService } from './services/config.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { EditModalComponent } from './systems/edit-modal/edit-modal.component';
 
 
 function appConfigInit(appConfigService: ConfigService): () => Observable<any> {
@@ -26,17 +23,14 @@ function appConfigInit(appConfigService: ConfigService): () => Observable<any> {
 @NgModule({
   declarations: [
     AppComponent,
-    SystemsComponent,
     SettingsComponent,
-    SystemItemComponent,
-    EditModalComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    FontAwesomeModule,
     HttpClientModule,
     ToastrModule.forRoot({
       progressBar: true,

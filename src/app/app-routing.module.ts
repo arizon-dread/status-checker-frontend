@@ -4,8 +4,8 @@ import { SystemsComponent } from './systems/systems.component';
 import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
-  {path: 'systems', component: SystemsComponent},
-  {path: 'settings', component: SettingsComponent}
+  { path: 'settings', component: SettingsComponent },
+  { path: 'systems', loadChildren: () => import('./systems/systems.module').then(m => m.SystemsModule) }
 ];
 
 @NgModule({
