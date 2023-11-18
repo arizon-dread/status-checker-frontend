@@ -12,7 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class SystemItemComponent implements OnInit, OnDestroy {
 
-  @Input() system: SystemStatusResponse | undefined;
+  @Input() system!: SystemStatusResponse;
   faCircleCheck = faCircleCheck;
   class = 'text-success';
   title = 'System is up';
@@ -32,7 +32,7 @@ export class SystemItemComponent implements OnInit, OnDestroy {
       this.faCircleCheck = faCircleXmark;
       this.title = 'The last poll was deemed unsuccessful'
     }
-    if (this.system?.lastOkTime.includes("0001-01-01")) {
+    if (!this.system?.lastOkTime.includes("0001-01-01")) {
       this.dateOrNeverCalled = this.system?.lastOkTime ?? "";
       this.dateStyle = "";
     } 
@@ -56,6 +56,9 @@ export class SystemItemComponent implements OnInit, OnDestroy {
       });
     }
     
+  }
+  openEditModal(system: SystemStatusResponse) {
+    //open editModal with MatDialog
   }
 
 }

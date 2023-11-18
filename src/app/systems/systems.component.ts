@@ -1,10 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SystemService } from './services/system.service';
 import { SystemStatusResponse } from './models/system-status-response';
 import { ErrorHandlerService } from '../shared/services/error-handler.service';
 import { ToastrType } from '../shared/enums/toastr-type';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-systems',

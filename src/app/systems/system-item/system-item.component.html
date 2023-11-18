@@ -2,7 +2,7 @@
     <div class="card-header row g-0">
         <div class="col-md-9">
             <h4>
-                {{system?.name}}
+                {{system.name}}
             </h4>
         </div>
         
@@ -16,10 +16,10 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-1"><label for="name">Name:</label></div>
-            <div test-id="name" id="name" class="col-md-3">{{system?.name}}</div>
+            <div test-id="name" id="name" class="col-md-3">{{system.name}}</div>
             <div class="col-md-3"><label for="lastOK">Last successful check:</label></div>
             <div id="lastOK" class="col-md-4" [class]="dateStyle">{{dateOrNeverCalled}}</div>
-            
+            <div class="col-md-1"><button class="btn btn-outline-primary" (click)="openEditModal(system)">Edit</button></div>
         </div>
     
     </div>
