@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { SystemsRoutingModule } from './systems-routing.module';
 import { SystemsComponent } from './systems.component';
@@ -18,6 +18,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CommonModule,
     SystemsRoutingModule,
     FontAwesomeModule,
+  ],
+  providers: [
+    DatePipe
   ]
 })
 export class SystemsModule { }

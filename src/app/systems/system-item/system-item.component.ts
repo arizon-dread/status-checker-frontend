@@ -4,6 +4,7 @@ import { faCircleCheck, faCircleExclamation, faCircleXmark } from '@fortawesome/
 import { SystemService } from '../services/system.service';
 import { Subscription } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-system-item',
@@ -16,11 +17,11 @@ export class SystemItemComponent implements OnInit, OnDestroy {
   faCircleCheck = faCircleCheck;
   class = 'text-success';
   title = 'System is up';
-  dateOrNeverCalled = "Never polled";
+  displayDate = true;
   dateStyle = 'fst-italic';
   destroyRef = inject(DestroyRef)
   systemSub: Subscription | undefined;
-  constructor(private systemSvc: SystemService) { }
+  constructor(private systemSvc: SystemService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     if (this.system?.status === '') {
@@ -32,10 +33,8 @@ export class SystemItemComponent implements OnInit, OnDestroy {
       this.faCircleCheck = faCircleXmark;
       this.title = 'The last poll was deemed unsuccessful'
     }
-    if (!this.system?.lastOkTime.includes("0001-01-01")) {
-      this.dateOrNeverCalled = this.system?.lastOkTime ?? "";
-      this.dateStyle = "";
-    } 
+    this.setDisplayLastOKTime(this.system);
+    
   }
   ngOnDestroy(): void {
       if (this.systemSub) {
@@ -48,6 +47,7 @@ export class SystemItemComponent implements OnInit, OnDestroy {
         next: (data: SystemStatusResponse) => {
           if (data) {
             this.system = data;
+            this.setDisplayLastOKTime(data);
           }
         },
         error: (err: Error) => {
@@ -59,6 +59,12 @@ export class SystemItemComponent implements OnInit, OnDestroy {
   }
   openEditModal(system: SystemStatusResponse) {
     //open editModal with MatDialog
+  }
+  setDisplayLastOKTime(system: SystemStatusResponse) {
+    console.log(system?.lastOkTime)
+    if (system?.lastOkTime.includes("0001-01-01")) {
+      this.displayDate = false;
+    } 
   }
 
 }

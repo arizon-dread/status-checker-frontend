@@ -18,7 +18,7 @@
             <div class="col-md-1"><label for="name">Name:</label></div>
             <div test-id="name" id="name" class="col-md-3">{{system.name}}</div>
             <div class="col-md-3"><label for="lastOK">Last successful check:</label></div>
-            <div id="lastOK" class="col-md-4" [class]="dateStyle">{{dateOrNeverCalled}}</div>
+            <div id="lastOK" class="col-md-4" [class]="dateStyle"><span *ngIf="displayDate">{{system.lastOkTime | date:'YYYY-MM-dd HH:mm:SS'}}</span><span *ngIf="!displayDate">Never polled</span></div>
             <div class="col-md-1"><button class="btn btn-outline-primary" (click)="openEditModal(system)">Edit</button></div>
         </div>
     
