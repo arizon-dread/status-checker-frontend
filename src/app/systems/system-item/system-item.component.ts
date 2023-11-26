@@ -1,4 +1,4 @@
-import { Component, DestroyRef, Input, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, inject } from '@angular/core';
 import { SystemStatusResponse } from '../models/system-status-response';
 import { faCircleCheck, faCircleExclamation, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { SystemService } from '../services/system.service';
@@ -11,7 +11,7 @@ import { DatePipe } from '@angular/common';
   templateUrl: './system-item.component.html',
   styleUrls: ['./system-item.component.css']
 })
-export class SystemItemComponent implements OnInit, OnDestroy {
+export class SystemItemComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() system!: SystemStatusResponse;
   faCircleCheck = faCircleCheck;
@@ -22,6 +22,12 @@ export class SystemItemComponent implements OnInit, OnDestroy {
   destroyRef = inject(DestroyRef)
   systemSub: Subscription | undefined;
   constructor(private systemSvc: SystemService, private datePipe: DatePipe) { }
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['system'].currentValue && changes['system'].currentValue != changes['system'].previousValue) {
+      this.system = changes['system'].currentValue;
+    }
+  }
 
   ngOnInit(): void {
     if (this.system?.status === '') {
@@ -36,6 +42,7 @@ export class SystemItemComponent implements OnInit, OnDestroy {
     this.setDisplayLastOKTime(this.system);
     
   }
+
   ngOnDestroy(): void {
       if (this.systemSub) {
         this.systemSub.unsubscribe();
@@ -59,6 +66,7 @@ export class SystemItemComponent implements OnInit, OnDestroy {
   }
   openEditModal(system: SystemStatusResponse) {
     //open editModal with MatDialog
+
   }
   setDisplayLastOKTime(system: SystemStatusResponse) {
     console.log(system?.lastOkTime)
