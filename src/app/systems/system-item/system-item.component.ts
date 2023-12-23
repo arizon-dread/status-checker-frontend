@@ -30,7 +30,12 @@ export class SystemItemComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit(): void {
-    if (this.system?.status === '') {
+    this.updateStatusIcon();
+    this.setDisplayLastOKTime(this.system);
+    
+  }
+  updateStatusIcon(): void {
+     if (this.system?.status === '') {
       this.class = 'text-warning';
       this.faCircleCheck = faCircleExclamation;
       this.title = 'It seems this system has never been polled.'
@@ -38,9 +43,11 @@ export class SystemItemComponent implements OnInit, OnDestroy, OnChanges {
       this.class = 'text-danger';
       this.faCircleCheck = faCircleXmark;
       this.title = 'The last poll was deemed unsuccessful'
+    } else if (this.system?.status === 'OK') {
+      this.class = 'text-success';
+      this.faCircleCheck = faCircleCheck;
+      this.title = 'System is up';
     }
-    this.setDisplayLastOKTime(this.system);
-    
   }
 
   ngOnDestroy(): void {
@@ -55,6 +62,7 @@ export class SystemItemComponent implements OnInit, OnDestroy, OnChanges {
           if (data) {
             this.system = data;
             this.setDisplayLastOKTime(data);
+            this.updateStatusIcon();
           }
         },
         error: (err: Error) => {
@@ -72,7 +80,9 @@ export class SystemItemComponent implements OnInit, OnDestroy, OnChanges {
     console.log(system?.lastOkTime)
     if (system?.lastOkTime.includes("0001-01-01")) {
       this.displayDate = false;
-    } 
+    } else {
+      this.displayDate = true;      
+    }
   }
 
 }

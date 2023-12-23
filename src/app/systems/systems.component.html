@@ -1,4 +1,5 @@
 <h3>Systems</h3>
+<span *ngIf="!systemResps?.length">The database contains no systems to monitor.</span>
 <div *ngFor="let system of systemResps">
     <app-system-item [system]="system"></app-system-item>
 </div>
