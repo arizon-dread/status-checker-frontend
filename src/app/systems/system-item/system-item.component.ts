@@ -11,7 +11,7 @@ import { DatePipe } from '@angular/common';
   templateUrl: './system-item.component.html',
   styleUrls: ['./system-item.component.css']
 })
-export class SystemItemComponent implements OnInit, OnDestroy, OnChanges {
+export class SystemItemComponent implements OnInit, OnChanges {
 
   @Input() system!: SystemStatusResponse;
   faCircleCheck = faCircleCheck;
@@ -21,7 +21,6 @@ export class SystemItemComponent implements OnInit, OnDestroy, OnChanges {
   displayDate = true;
   dateStyle = 'fst-italic';
   destroyRef = inject(DestroyRef)
-  systemSub: Subscription | undefined;
   constructor(private systemSvc: SystemService, private datePipe: DatePipe) { }
   
   ngOnChanges(changes: SimpleChanges): void {
@@ -51,11 +50,7 @@ export class SystemItemComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  ngOnDestroy(): void {
-      if (this.systemSub) {
-        this.systemSub.unsubscribe();
-      }
-  }
+  
   poll() {
     this.loading = true;
     if (this.system) {
