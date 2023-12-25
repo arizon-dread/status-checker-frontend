@@ -7,7 +7,7 @@
         </div>
         
         <div class="col-md-2 mt-1 d-flex justify-content-md-end">
-            Status: &nbsp;<fa-icon [icon]="faCircleCheck" [class]="class" [title]="title"></fa-icon>
+            Status: &nbsp;<fa-icon *ngIf="!loading" [icon]="faCircleCheck" [class]="class" [title]="title"></fa-icon><div class="spinner-border spinner-border-sm text-primary mt-1" role="status" *ngIf="loading"></div>
         </div>
         <div class="col-md-1 d-flex justify-content-md-end">
             <button class="btn btn-primary" (click)="poll()">Poll</button>

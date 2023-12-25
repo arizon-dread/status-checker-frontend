@@ -17,6 +17,7 @@ export class SystemItemComponent implements OnInit, OnDestroy, OnChanges {
   faCircleCheck = faCircleCheck;
   class = 'text-success';
   title = 'System is up';
+  loading = false;
   displayDate = true;
   dateStyle = 'fst-italic';
   destroyRef = inject(DestroyRef)
@@ -56,16 +57,19 @@ export class SystemItemComponent implements OnInit, OnDestroy, OnChanges {
       }
   }
   poll() {
+    this.loading = true;
     if (this.system) {
       this.systemSvc.getSystem(this.system?.id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
         next: (data: SystemStatusResponse) => {
           if (data) {
+            this.loading = false;
             this.system = data;
             this.setDisplayLastOKTime(data);
             this.updateStatusIcon();
           }
         },
         error: (err: Error) => {
+          this.loading = false;
           console.log("Error while polling: " + err.message);
         }      
       });
