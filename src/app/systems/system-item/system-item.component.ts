@@ -4,6 +4,8 @@ import { faCircleCheck, faCircleExclamation, faCircleXmark } from '@fortawesome/
 import { SystemService } from '../services/system.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DatePipe } from '@angular/common';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { EditModalComponent } from '../edit-modal/edit-modal.component';
 
 @Component({
   selector: 'app-system-item',
@@ -20,7 +22,8 @@ export class SystemItemComponent implements OnInit, OnChanges {
   displayDate = true;
   dateStyle = 'fst-italic';
   destroyRef = inject(DestroyRef)
-  constructor(private systemSvc: SystemService, private datePipe: DatePipe, private matDialogRef: MatDialogRef) { }
+  matDialogRef: MatDialogRef<EditModalComponent> | undefined;
+  constructor(private systemSvc: SystemService, private datePipe: DatePipe, private dialog: MatDialog) { }
   
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['system'].currentValue && changes['system'].currentValue != changes['system'].previousValue) {
@@ -73,9 +76,27 @@ export class SystemItemComponent implements OnInit, OnChanges {
   openEditModal(system: SystemStatusResponse) {
     //open editModal with MatDialog
 
+    this.matDialogRef = this.dialog.open(EditModalComponent, {
+      hasBackdrop: true,
+      height: '80%',
+      width: '60%',
+      backdropClass: 'cdk-overlay-transparent-backdrop',
+      data: this.system
+    });
+
+    this.matDialogRef.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next:(data: SystemStatusResponse) => {
+        if (data) {
+          //closed with submit
+          //TODO: Submit data to backend.
+        } else {
+          //action was cancelled
+        }
+      }
+    })
   }
   setDisplayLastOKTime(system: SystemStatusResponse) {
-    console.log(system?.lastOkTime)
+    
     if (system?.lastOkTime.includes("0001-01-01")) {
       this.displayDate = false;
     } else {

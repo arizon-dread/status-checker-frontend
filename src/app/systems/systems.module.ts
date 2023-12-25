@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-//import { MatDialogModule } from '@angular/material/dialog';
+import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
 import { SystemsRoutingModule } from './systems-routing.module';
 import { SystemsComponent } from './systems.component';
 import { SystemItemComponent } from './system-item/system-item.component';
@@ -16,13 +16,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   ],
   imports: [
     CommonModule,
-    //MatDialogModule,
+    MatDialogModule,
     SystemsRoutingModule,
     FontAwesomeModule,
   ],
-
   providers: [
-    DatePipe
+    DatePipe,
+     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
   ]
 })
 export class SystemsModule { }
