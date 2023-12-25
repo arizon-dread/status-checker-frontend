@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-
+//import { MatDialogModule } from '@angular/material/dialog';
 import { SystemsRoutingModule } from './systems-routing.module';
 import { SystemsComponent } from './systems.component';
 import { SystemItemComponent } from './system-item/system-item.component';
@@ -16,9 +16,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   ],
   imports: [
     CommonModule,
+    //MatDialogModule,
     SystemsRoutingModule,
     FontAwesomeModule,
   ],
+
   providers: [
     DatePipe
   ]

@@ -2,7 +2,6 @@ import { Component, DestroyRef, Input, OnChanges, OnDestroy, OnInit, SimpleChang
 import { SystemStatusResponse } from '../models/system-status-response';
 import { faCircleCheck, faCircleExclamation, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { SystemService } from '../services/system.service';
-import { Subscription } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DatePipe } from '@angular/common';
 
@@ -21,7 +20,7 @@ export class SystemItemComponent implements OnInit, OnChanges {
   displayDate = true;
   dateStyle = 'fst-italic';
   destroyRef = inject(DestroyRef)
-  constructor(private systemSvc: SystemService, private datePipe: DatePipe) { }
+  constructor(private systemSvc: SystemService, private datePipe: DatePipe, private matDialogRef: MatDialogRef) { }
   
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['system'].currentValue && changes['system'].currentValue != changes['system'].previousValue) {
