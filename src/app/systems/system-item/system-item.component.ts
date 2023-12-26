@@ -78,8 +78,12 @@ export class SystemItemComponent implements OnInit, OnChanges {
 
     this.matDialogRef = this.dialog.open(EditModalComponent, {
       hasBackdrop: true,
-      height: '80%',
-      width: '60%',
+      height: 'fit-content',
+      width: 'fit-content',
+      position: {
+        left: '20%',
+        top: '10%'
+      },
       backdropClass: 'cdk-overlay-transparent-backdrop',
       data: this.system
     });
@@ -92,6 +96,11 @@ export class SystemItemComponent implements OnInit, OnChanges {
         } else {
           //action was cancelled
         }
+      }
+    });
+    this.matDialogRef.backdropClick().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: () => {
+        this.matDialogRef?.close();
       }
     })
   }

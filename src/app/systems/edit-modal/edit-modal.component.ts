@@ -13,11 +13,10 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./edit-modal.component.css']
 })
 export class EditModalComponent implements OnInit, OnDestroy {
-
-  systemResps!: SystemStatusResponse[];
+  
   displayCert = false;
   alertUrlSub!: Subscription | undefined;
-  systemFg = this.fb.group({
+  form = this.fb.group({
     id: [{value: 0, disabled: true}], 
     name: ['', Validators.required],
     alertBody: ['', Validators.required, Validators.maxLength(500)],
@@ -38,8 +37,8 @@ export class EditModalComponent implements OnInit, OnDestroy {
   constructor(private systemSvc: SystemService, private errHandler: ErrorHandlerService, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: SystemStatusResponse) { }
 
   ngOnInit(): void {
-    this.systemFg.patchValue(this.data);
-    this.alertUrlSub = this.systemFg.controls['alertUrl'].valueChanges.subscribe(value => {
+    this.form.patchValue(this.data);
+    this.alertUrlSub = this.form.controls['alertUrl'].valueChanges.subscribe(value => {
       if (value?.includes("https")) {
         this.displayCert = true;
       } else {
@@ -51,6 +50,13 @@ export class EditModalComponent implements OnInit, OnDestroy {
       if (this.alertUrlSub) {
         this.alertUrlSub.unsubscribe();
       }
+  }
+  close(system: SystemStatusResponse | null) {
+    if (system) {
+      //save
+    } else {
+      //close
+    }
   }
 
 }
