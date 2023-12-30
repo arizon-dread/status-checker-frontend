@@ -1,27 +1,42 @@
-<div class="card mb-2">
-    <div class="card-header row g-0">
-        <div class="col-md-9">
-            <h4>
-                {{system.name}}
-            </h4>
+<mat-accordion>
+    <mat-expansion-panel class="card mb-2" hideToggle>
+        <mat-expansion-panel-header class="card-header row g-0">
+
+            <div class="col-md-9">
+                <h4>
+                    {{ system.name }}
+                </h4>
+            </div>
+            <div class="col-md-2 mt-2 d-flex justify-content-md-end">
+                Status: &nbsp;<fa-icon *ngIf="!loading" [icon]="faCircleCheck" [class]="class"
+                    [title]="title"></fa-icon>
+                <div class="spinner-border spinner-border-sm text-primary mt-1" role="status" *ngIf="loading">
+                </div>
+            </div>
+            <div class="col-md-1 d-flex justify-content-md-end">
+                <button class="btn btn-primary" (click)="poll()">Poll</button>
+            </div>
+
+
+        </mat-expansion-panel-header>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-1"><label for="name">Name:</label></div>
+                <div test-id="name" id="name" class="col-md-3">{{ system.name }}</div>
+                <div class="col-md-3">
+                    <label for="lastOK">Last successful check:</label>
+                </div>
+                <div id="lastOK" class="col-md-4" [class]="dateStyle">
+                    <span *ngIf="displayDate">{{ system.lastOkTime | date : "YYYY-MM-dd HH:mm:SS" }}</span><span
+                        *ngIf="!displayDate">Never polled</span>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-outline-primary" (click)="openEditModal(system)">
+                        Edit
+                    </button>
+                </div>
+            </div>
         </div>
-        
-        <div class="col-md-2 mt-1 d-flex justify-content-md-end">
-            Status: &nbsp;<fa-icon *ngIf="!loading" [icon]="faCircleCheck" [class]="class" [title]="title"></fa-icon><div class="spinner-border spinner-border-sm text-primary mt-1" role="status" *ngIf="loading"></div>
-        </div>
-        <div class="col-md-1 d-flex justify-content-md-end">
-            <button class="btn btn-primary" (click)="poll()">Poll</button>
-        </div>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-1"><label for="name">Name:</label></div>
-            <div test-id="name" id="name" class="col-md-3">{{system.name}}</div>
-            <div class="col-md-3"><label for="lastOK">Last successful check:</label></div>
-            <div id="lastOK" class="col-md-4" [class]="dateStyle"><span *ngIf="displayDate">{{system.lastOkTime | date:'YYYY-MM-dd HH:mm:SS'}}</span><span *ngIf="!displayDate">Never polled</span></div>
-            <div class="col-md-1"><button class="btn btn-outline-primary" (click)="openEditModal(system)">Edit</button></div>
-        </div>
-    
-    </div>
-</div>
-    
+    </mat-expansion-panel>
+</mat-accordion>

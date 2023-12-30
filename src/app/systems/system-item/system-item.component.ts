@@ -79,12 +79,12 @@ export class SystemItemComponent implements OnInit, OnChanges {
     this.matDialogRef = this.dialog.open(EditModalComponent, {
       hasBackdrop: true,
       height: 'fit-content',
-      width: 'fit-content',
+      width: '80%',
       position: {
-        left: '20%',
-        top: '10%'
+        left: '10%',
+        top: '5%'
       },
-      backdropClass: 'cdk-overlay-transparent-backdrop',
+      backdropClass: 'cdk-overlay-dark-backdrop',
       data: this.system
     });
 
