@@ -1,54 +1,35 @@
 <div class="card">
   <div class="card-header h2" mat-dialog-title>Editing {{ data.name }}</div>
-  <div class="card-body" mat-dialog-content class="pt-3">
-    <form [formGroup]="form">
+  <form [formGroup]="form">
+    <div class="card-body" mat-dialog-content class="pt-3">
       <div class="row mb-2">
         <div class="col-md-2">
           <label for="id">Id</label>
         </div>
-        <div class="col-md-3">
-          <input
-            type="text"
-            id="id"
-            formControlName="id"
-            class="form-control"
-          />
+        <div class="col-md-2">
+          <input type="text" id="id" formControlName="id" class="form-control" />
         </div>
         <div class="col-md-2">
           <label for="name">Name<span class="danger">*</span></label>
         </div>
-        <div class="col-md-3">
-          <input
-            type="text"
-            id="name"
-            formControlName="name"
-            class="form-control"
-          />
+        <div class="col-md-6">
+          <input type="text" id="name" formControlName="name" class="form-control" />
         </div>
       </div>
       <div class="row mb-2">
         <div class="col-md-2">
           <label for="alertUrl">Alert URL</label>
         </div>
-        <div class="col-md-3">
-          <input
-            id="alertUrl"
-            formControlName="alertUrl"
-            rows="3"
-            maxlength="500"
-            class="form-control"
-          />
+        <div class="col-md-10">
+          <input id="alertUrl" formControlName="alertUrl" rows="3" maxlength="500" class="form-control" />
         </div>
+      </div>
+      <div class="row mb-2">
         <div class="col-md-2">
           <label for="alertEmail">Alert e-mail</label>
         </div>
-        <div class="col-md-3">
-          <input
-            type="email"
-            id="alertEmail"
-            formControlName="alertEmail"
-            class="form-control"
-          />
+        <div class="col-md-10">
+          <input type="email" id="alertEmail" formControlName="alertEmail" class="form-control" />
         </div>
       </div>
       <div class="row mb-2">
@@ -56,36 +37,24 @@
           <label for="alertBody">Alert body<span class="danger">*</span></label>
         </div>
         <div class="col-md-10">
-          <textarea
-            id="alertBody"
-            formControlName="alertBody"
-            rows="3"
-            maxlength="500"
-            class="form-control"
-          ></textarea>
+          <textarea id="alertBody" formControlName="alertBody" rows="3" maxlength="500" class="form-control"></textarea>
         </div>
       </div>
       <div class="row mb-2">
         <div class="col-md-2">
           <label for="callBody">Call body</label>
         </div>
-        <div class="col-md-3">
-          <input
-            type="text"
-            id="callBody"
-            formControlName="callBody"
-            class="form-control"
-          />
+        <div class="col-md-10">
+          <textarea id="callBody" formControlName="callBody" rows="3" maxlength="500" class="form-control"></textarea>
+
         </div>
+        </div>
+        <div class="row mb-2">
         <div class="col-md-2">
           <label for="callUrl">Call URL<span class="danger">*</span></label>
         </div>
-        <div class="col-md-3">
-          <input
-            type="text"
-            id="callUrl"
-            formControlName="callUrl"
-            class="form-control"
+        <div class="col-md-10">
+          <input type="text" id="callUrl" formControlName="callUrl" class="form-control"
           />
         </div>
       </div>
@@ -94,23 +63,13 @@
           <label for="certExpirationDays">Cert expiration days</label>
         </div>
         <div class="col-md-3">
-          <input
-            type="text"
-            id="certExpirationDays"
-            formControlName="certExpirationDays"
-            class="form-control"
-          />
+          <input type="text" id="certExpirationDays" formControlName="certExpirationDays" class="form-control" />
         </div>
         <div class="col-md-2">
           <label for="certStatus">Cert status</label>
         </div>
         <div class="col-md-3">
-          <input
-            type="text"
-            id="certStatus"
-            formControlName="certStatus"
-            class="form-control"
-          />
+          <input type="text" id="certStatus" formControlName="certStatus" class="form-control" />
         </div>
       </div>
       <div class="row" *ngIf="">
@@ -183,14 +142,16 @@
           <input type="text" id="" formControlName="" />
         </div>
       </div>
-      <div class="row d-flex justify-content-end">
-        <div class="col-md-2 offset-md-8">
+    </div>
+    <div class="card-footer">
+      <div class="row">
+        <div class="col-md-2">
           <button role="cancel" id="cancel" (click)="close(null)" class="btn btn-secondary">Cancel</button>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 offset-md-8 d-flex justify-content-end">
           <input type="submit" id="submit" value="Save" (click)="close(data)" class="btn btn-success" />
         </div>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </div>
