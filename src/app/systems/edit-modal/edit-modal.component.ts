@@ -5,7 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
 import { SystemService } from '../services/system.service';
 import { ToastrType } from 'src/app/shared/enums/toastr-type';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-modal',
@@ -19,7 +19,7 @@ export class EditModalComponent implements OnInit, OnDestroy {
   form = this.fb.group({
     id: [{value: 0, disabled: true}], 
     name: ['', Validators.required],
-    alertBody: ['', Validators.required, Validators.maxLength(500)],
+    alertBody: ['', Validators.compose([Validators.required, Validators.maxLength(500)])],
     alertEmail: [''],
     alertUrl: [''],
     callBody: [''],
@@ -34,7 +34,11 @@ export class EditModalComponent implements OnInit, OnDestroy {
     responseMatch: ['', Validators.required],
     status: [{value: '', disabled: false}]
   })
-  constructor(private systemSvc: SystemService, private errHandler: ErrorHandlerService, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: SystemStatusResponse) { }
+  constructor(private systemSvc: SystemService, 
+              private errHandler: ErrorHandlerService, 
+              private fb: FormBuilder, 
+              @Inject(MAT_DIALOG_DATA) public data: SystemStatusResponse,
+              private matDialogRef: MatDialogRef<EditModalComponent>) { }
 
   ngOnInit(): void {
     this.form.patchValue(this.data);
@@ -55,6 +59,7 @@ export class EditModalComponent implements OnInit, OnDestroy {
     if (system) {
       //save
     } else {
+      this.matDialogRef.close();
       //close
     }
   }
