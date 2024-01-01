@@ -1,5 +1,5 @@
 <mat-accordion>
-    <mat-expansion-panel class="card mb-2" hideToggle>
+    <mat-expansion-panel class="card mb-2 rounded" hideToggle>
         <mat-expansion-panel-header class="card-header row g-0">
 
             <div class="col-md-9">
@@ -31,11 +31,11 @@
                     <div class="row">
                         <div test-id="lastFail" id="lastFail" class="col-md-3" [class]="dateStyle">
                             <span *ngIf="displayFailDate">{{ system.lastFailTime | date : "YYYY-MM-dd HH:mm:SS" }}</span>
-                            <span *ngIf="!displayFailDate">no data</span>
+                            <span *ngIf="!displayFailDate">No data</span>
                         </div>
                         <div id="lastOK" class="col-md-3" [class]="dateStyle">
                             <span *ngIf="displayOkDate">{{ system.lastOkTime | date : "YYYY-MM-dd HH:mm:SS" }}</span>
-                            <span *ngIf="!displayOkDate">Never polled</span>
+                            <span *ngIf="!displayOkDate">No data</span>
                         </div>
                     </div>
                 </div>
