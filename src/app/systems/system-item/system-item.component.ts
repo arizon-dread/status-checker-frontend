@@ -19,7 +19,8 @@ export class SystemItemComponent implements OnInit, OnChanges {
   class = 'text-success';
   title = 'System is up';
   loading = false;
-  displayDate = true;
+  displayOkDate = true;
+  displayFailDate = true;
   dateStyle = 'fst-italic';
   destroyRef = inject(DestroyRef)
   matDialogRef: MatDialogRef<EditModalComponent> | undefined;
@@ -53,7 +54,8 @@ export class SystemItemComponent implements OnInit, OnChanges {
   }
 
   
-  poll() {
+  poll(event: Event) {
+    event.stopPropagation();
     this.loading = true;
     if (this.system) {
       this.systemSvc.getSystem(this.system?.id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
@@ -107,9 +109,14 @@ export class SystemItemComponent implements OnInit, OnChanges {
   setDisplayLastOKTime(system: SystemStatusResponse) {
     
     if (system?.lastOkTime.includes("0001-01-01")) {
-      this.displayDate = false;
+      this.displayOkDate = false;
     } else {
-      this.displayDate = true;      
+      this.displayOkDate = true;      
+    }
+    if (system?.lastFailTime.includes("0001-01-01")) {
+      this.displayFailDate = false;
+    } else {
+      this.displayOkDate = true;
     }
   }
 

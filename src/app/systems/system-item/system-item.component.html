@@ -14,24 +14,32 @@
                 </div>
             </div>
             <div class="col-md-1 d-flex justify-content-md-end">
-                <button class="btn btn-primary" (click)="poll()">Poll</button>
+                <button class="btn btn-primary" (click)="poll($event)">Poll</button>
             </div>
-
-
         </mat-expansion-panel-header>
 
         <div class="card-body">
             <div class="row">
-                <div class="col-md-1"><label for="name">Name:</label></div>
-                <div test-id="name" id="name" class="col-md-3">{{ system.name }}</div>
-                <div class="col-md-3">
-                    <label for="lastOK">Last successful check:</label>
+                <div class="col-11">
+                    <div class="row">
+                        <div class="col-md-3"><label for="lastFail">Last failed check:</label></div>
+                        
+                        <div class="col-md-3">
+                            <label for="lastOK">Last successful check:</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div test-id="lastFail" id="lastFail" class="col-md-3" [class]="dateStyle">
+                            <span *ngIf="displayFailDate">{{ system.lastFailTime | date : "YYYY-MM-dd HH:mm:SS" }}</span>
+                            <span *ngIf="!displayFailDate">no data</span>
+                        </div>
+                        <div id="lastOK" class="col-md-3" [class]="dateStyle">
+                            <span *ngIf="displayOkDate">{{ system.lastOkTime | date : "YYYY-MM-dd HH:mm:SS" }}</span>
+                            <span *ngIf="!displayOkDate">Never polled</span>
+                        </div>
+                    </div>
                 </div>
-                <div id="lastOK" class="col-md-4" [class]="dateStyle">
-                    <span *ngIf="displayDate">{{ system.lastOkTime | date : "YYYY-MM-dd HH:mm:SS" }}</span><span
-                        *ngIf="!displayDate">Never polled</span>
-                </div>
-                <div class="col-md-1">
+                <div class="col-1">
                     <button class="btn btn-outline-primary" (click)="openEditModal(system)">
                         Edit
                     </button>
