@@ -16,6 +16,9 @@ export class SystemItemComponent implements OnInit, OnChanges {
 
   @Input() system!: SystemStatusResponse;
   faCircleCheck = faCircleCheck;
+  certStatusText = 'valid';
+  faCertStatus = faCircleCheck;
+  certStatusClass = 'text-success';
   class = 'text-success';
   title = 'System is up';
   loading = false;
@@ -50,6 +53,19 @@ export class SystemItemComponent implements OnInit, OnChanges {
       this.class = 'text-success';
       this.faCircleCheck = faCircleCheck;
       this.title = 'System is up';
+    }
+    if (this.system?.certStatus === 'OK') {
+      this.faCertStatus = faCircleCheck;
+      this.certStatusText = 'Valid';
+      this.certStatusClass = 'text-success';
+    } else if (this.system?.certStatus === '')  {
+      this.faCertStatus = faCircleExclamation;
+      this.certStatusText = 'Insecure scheme';
+      this.certStatusClass = 'text-secondary';
+    } else {
+      this.faCertStatus = faCircleXmark;
+      this.certStatusText = 'Invalid';
+      this.certStatusClass = 'text-danger';
     }
   }
 
@@ -108,16 +124,16 @@ export class SystemItemComponent implements OnInit, OnChanges {
   }
   setDisplayLastOKTime(system: SystemStatusResponse) {
     
-    if (system?.lastOkTime.includes("0001-01-01")) {
+    if (this.system?.lastOkTime.includes("0001-01-01")) {
       this.displayOkDate = false;
     } else {
       this.displayOkDate = true;      
     }
-    if (system?.lastFailTime.includes("0001-01-01")) {
+    if (this.system?.lastFailTime.includes("0001-01-01")) {
       this.displayFailDate = false;
     } else {
       this.displayOkDate = true;
     }
   }
-
+  
 }

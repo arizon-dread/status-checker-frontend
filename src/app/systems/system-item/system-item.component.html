@@ -27,6 +27,9 @@
                         <div class="col-md-3">
                             <label for="lastOK">Last successful check:</label>
                         </div>
+                        <div class="col-md-3">
+                            <label for="certStatus">Certificate Status:</label>
+                        </div>
                     </div>
                     <div class="row">
                         <div test-id="lastFail" id="lastFail" class="col-md-3" [class]="dateStyle">
@@ -36,6 +39,13 @@
                         <div id="lastOK" class="col-md-3" [class]="dateStyle">
                             <span *ngIf="displayOkDate">{{ system.lastOkTime | date : "YYYY-MM-dd HH:mm:SS" }}</span>
                             <span *ngIf="!displayOkDate">No data</span>
+                        </div>
+                        <div id="certStatus" class="col-md-3">
+                            {{ certStatusText }}&nbsp;<fa-icon *ngIf="!loading" [icon]="faCertStatus" [class]="certStatusClass"
+                                [title]="title"></fa-icon>
+                            <div class="spinner-border spinner-border-sm text-primary mt-1" role="status" *ngIf="loading">
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
