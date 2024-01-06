@@ -1,5 +1,17 @@
-<h3>Systems</h3>
-<span *ngIf="!systemResps?.length">The database contains no systems to monitor.</span>
-<div *ngFor="let system of systemResps">
-    <app-system-item [system]="system"></app-system-item>
+<div class="col-12">
+    <div class="row">
+        <div class="col-sm-3 col-xs-12">
+            <h3>Systems</h3>
+        </div>
+        <div class="col-sm-3 col-xs-12 offset-sm-6 d-flex justify-content-sm-end mb-2">
+            <button class="btn btn-success" (click)="addSystem()">Add <fa-icon [icon]="faPlus"></fa-icon></button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <span *ngIf="!systemResps?.length">The database contains no systems to monitor.</span>
+            <div *ngFor="let system of systemResps">
+                <app-system-item [system]="system"></app-system-item>
+        </div>
+    </div>
 </div>

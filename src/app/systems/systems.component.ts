@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, Inject, OnInit, inject } from '@angular/core';
 import { SystemService } from './services/system.service';
 import { SystemStatusResponse } from './models/system-status-response';
 import { ErrorHandlerService } from '../shared/services/error-handler.service';
 import { ToastrType } from '../shared/enums/toastr-type';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { EditModalComponent } from './edit-modal/edit-modal.component';
 
 @Component({
   selector: 'app-systems',
@@ -10,12 +14,19 @@ import { ToastrType } from '../shared/enums/toastr-type';
   styleUrls: ['./systems.component.css']
 })
 export class SystemsComponent implements OnInit {
-  systemResps: SystemStatusResponse[] | undefined;
 
-  constructor (private systemSvc: SystemService, private errHandler: ErrorHandlerService) {}
+  destroyRef = inject(DestroyRef);
+  matDialogRef: MatDialogRef<EditModalComponent>| undefined; 
+  systemResps: SystemStatusResponse[] | undefined;
+  faPlus = faPlus;
+
+  constructor (private systemSvc: SystemService, 
+               private errHandler: ErrorHandlerService,
+               private dialog: MatDialog) {}
   ngOnInit() {
     const statusRespSub = this.systemSvc.getSystems().subscribe({
       next: (data: SystemStatusResponse[]) => {
+        
         if (data) {
           this.systemResps = data;
         }
@@ -28,4 +39,33 @@ export class SystemsComponent implements OnInit {
       }
     });
   } 
+  addSystem() {
+    this.matDialogRef = this.dialog.open(EditModalComponent, {
+      hasBackdrop: true,
+      height: 'fit-content',
+      width: '80%',
+      position: {
+        left: '10%',
+        top: '5%'
+      },
+      backdropClass: 'cdk-overlay-dark-backdrop',
+      data: {}
+    });
+
+    this.matDialogRef.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next:(data: SystemStatusResponse) => {
+        if (data) {
+          //closed with submit
+          //TODO: Submit data to backend.
+        } else {
+          //action was cancelled
+        }
+      }
+    });
+    this.matDialogRef.backdropClick().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: () => {
+        this.matDialogRef?.close();
+      }
+    })
+  }
 }
