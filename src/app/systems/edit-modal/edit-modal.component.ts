@@ -30,7 +30,7 @@ export class EditModalComponent implements OnInit, OnDestroy {
     certExpirationDays: [0],
     certStatus: [{ value: '', disabled: true }],
     clientCertId: [0],
-    httpMethod: [''],
+    httpMethod: ['get'],
     lastFailTime: [{ value: '', disabled: true }],
     lastOkTime: [{ value: '', disabled: true }],
     message: [''],

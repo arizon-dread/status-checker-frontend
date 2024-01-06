@@ -9,11 +9,20 @@
         <div class="col-md-2">
           <input type="text" id="id" formControlName="id" class="form-control" />
         </div>
-        <div class="col-md-2">
+        <div class="col-md-1">
           <label for="name">Name<span class="danger">*</span></label>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
           <input type="text" id="name" formControlName="name" class="form-control" />
+        </div>
+        <div class="col-md-2">
+          <label for="httpMethod">Http method<span class="danger">*</span></label>
+        </div>
+        <div class="col-md-2">
+          <select id="httpMethod" formControlName="httpMethod" class="form-select" aria-label="Use GET or POST to test uptime of the system.">
+            <option>GET</option>
+            <option>POST</option>
+          </select>
         </div>
       </div>
       <div class="row mb-2">
@@ -48,14 +57,13 @@
           <textarea id="callBody" formControlName="callBody" rows="3" maxlength="500" class="form-control"></textarea>
 
         </div>
-        </div>
-        <div class="row mb-2">
+      </div>
+      <div class="row mb-2">
         <div class="col-md-2">
           <label for="callUrl">Call URL<span class="danger">*</span></label>
         </div>
         <div class="col-md-10">
-          <input type="text" id="callUrl" formControlName="callUrl" class="form-control"
-          />
+          <input type="text" id="callUrl" formControlName="callUrl" class="form-control" />
         </div>
       </div>
       <div class="row mb-2" *ngIf="displayCert">
