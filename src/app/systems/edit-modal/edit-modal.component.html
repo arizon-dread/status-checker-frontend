@@ -1,6 +1,6 @@
 <div class="card rounded">
   <div class="card-header h2" mat-dialog-title>{{title}}</div>
-  <form [formGroup]="form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="card-body" mat-dialog-content class="pt-3">
       <div class="row mb-2">
         <div class="col-md-2">
@@ -10,19 +10,60 @@
           <input type="text" id="id" formControlName="id" class="form-control" />
         </div>
         <div class="col-md-1">
-          <label for="name">Name<span class="danger">*</span></label>
+          <label for="name">Name <span class="danger">*</span></label>
         </div>
         <div class="col-md-3">
           <input type="text" id="name" formControlName="name" class="form-control" />
         </div>
         <div class="col-md-2">
-          <label for="httpMethod">Http method<span class="danger">*</span></label>
+          <label for="httpMethod">Http method <span class="danger">*</span></label>
         </div>
         <div class="col-md-2">
-          <select id="httpMethod" formControlName="httpMethod" class="form-select" aria-label="Use GET or POST to test uptime of the system.">
+          <select id="httpMethod" formControlName="httpMethod" class="form-select"
+            aria-label="Use GET or POST to test uptime of the system.">
             <option>GET</option>
             <option>POST</option>
           </select>
+        </div>
+      </div>
+
+      <div class="row mb-2" *ngIf="form.controls['httpMethod'].value === 'POST'">
+        <div class="col-md-2">
+          <label for="callBody">Call body</label>
+        </div>
+        <div class="col-md-10">
+          <textarea id="callBody" formControlName="callBody" rows="3" maxlength="500" class="form-control"></textarea>
+
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-md-2">
+          <label for="callUrl">Call URL <span class="danger">*</span></label>
+        </div>
+        <div class="col-md-10">
+          <input type="text" id="callUrl" formControlName="callUrl" class="form-control" />
+        </div>
+      </div>
+      <div class="row mb-2" *ngIf="displayCert">
+        <div class="col-md-2">
+          <label for="certExpirationDays">Cert expiration days</label>
+        </div>
+        <div class="col-md-3">
+          <input type="text" id="certExpirationDays" formControlName="certExpirationDays" class="form-control" />
+        </div>
+        <div class="col-md-2">
+          <label for="certStatus">Cert status</label>
+        </div>
+        <div class="col-md-3">
+          <input type="text" id="certStatus" formControlName="certStatus" class="form-control" />
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-md-2">
+          <label for="responseMatch">Response should contain <span class="danger">*</span></label>
+        </div>
+        <div class="col-md-10">
+          <textarea id="responseMatch" formControlName="responseMatch" rows="3" maxlength="1000" class="form-control"></textarea>
         </div>
       </div>
       <div class="row mb-2">
@@ -43,55 +84,10 @@
       </div>
       <div class="row mb-2">
         <div class="col-md-2">
-          <label for="alertBody">Alert body<span class="danger">*</span></label>
+          <label for="alertBody">Alert body <span class="danger">*</span></label>
         </div>
         <div class="col-md-10">
           <textarea id="alertBody" formControlName="alertBody" rows="3" maxlength="500" class="form-control"></textarea>
-        </div>
-      </div>
-      <div class="row mb-2">
-        <div class="col-md-2">
-          <label for="callBody">Call body</label>
-        </div>
-        <div class="col-md-10">
-          <textarea id="callBody" formControlName="callBody" rows="3" maxlength="500" class="form-control"></textarea>
-
-        </div>
-      </div>
-      <div class="row mb-2">
-        <div class="col-md-2">
-          <label for="callUrl">Call URL<span class="danger">*</span></label>
-        </div>
-        <div class="col-md-10">
-          <input type="text" id="callUrl" formControlName="callUrl" class="form-control" />
-        </div>
-      </div>
-      <div class="row mb-2" *ngIf="displayCert">
-        <div class="col-md-2">
-          <label for="certExpirationDays">Cert expiration days</label>
-        </div>
-        <div class="col-md-3">
-          <input type="text" id="certExpirationDays" formControlName="certExpirationDays" class="form-control" />
-        </div>
-        <div class="col-md-2">
-          <label for="certStatus">Cert status</label>
-        </div>
-        <div class="col-md-3">
-          <input type="text" id="certStatus" formControlName="certStatus" class="form-control" />
-        </div>
-      </div>
-      <div class="row" *ngIf="">
-        <div class="col-md-3">
-          <label for=""></label>
-        </div>
-        <div class="col-md-3">
-          <input type="text" id="" formControlName="" />
-        </div>
-        <div class="col-md-3">
-          <label for=""></label>
-        </div>
-        <div class="col-md-3">
-          <input type="text" id="" formControlName="" />
         </div>
       </div>
       <div class="row" *ngIf="">
@@ -157,7 +153,7 @@
           <button role="cancel" id="cancel" (click)="close(null)" class="btn btn-secondary">Cancel</button>
         </div>
         <div class="col-md-2 offset-md-8 d-flex justify-content-end">
-          <input type="submit" id="submit" value="Save" (click)="close(data)" class="btn btn-success" />
+          <input type="submit" id="submit" value="Save" class="btn btn-success" />
         </div>
       </div>
     </div>
