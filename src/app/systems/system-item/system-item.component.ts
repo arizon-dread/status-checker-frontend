@@ -6,6 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DatePipe } from '@angular/common';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { EditModalComponent } from '../edit-modal/edit-modal.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-system-item',
@@ -109,10 +110,16 @@ export class SystemItemComponent implements OnInit, OnChanges {
     this.matDialogRef.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next:(data: SystemStatusResponse) => {
         if (data) {
-          //closed with submit
-          //TODO: Submit data to backend.
-        } else {
-          //action was cancelled
+          //closed with submit  
+          //TODO: This creates a new system instead of updating.
+          this.systemSvc.saveSystem(data).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+            next: (data: SystemStatusResponse) => {
+              this.system = data;
+            }, 
+            error: (err: HttpErrorResponse) => {
+              console.log(err.message);
+            }
+          });
         }
       }
     });
