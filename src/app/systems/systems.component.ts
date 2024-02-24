@@ -7,6 +7,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-systems',
@@ -17,7 +18,7 @@ export class SystemsComponent implements OnInit {
 
   destroyRef = inject(DestroyRef);
   matDialogRef: MatDialogRef<EditModalComponent>| undefined; 
-  systemResps: SystemStatusResponse[] | undefined;
+  systemResps: SystemStatusResponse[] = [];
   faPlus = faPlus;
 
   constructor (private systemSvc: SystemService, 
@@ -55,10 +56,15 @@ export class SystemsComponent implements OnInit {
     this.matDialogRef.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next:(data: SystemStatusResponse) => {
         if (data) {
-          //closed with submit
-          //TODO: Submit data to backend.
-        } else {
-          //action was cancelled
+          //closed with submit  
+          this.systemSvc.saveSystem(data).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+            next: (data: SystemStatusResponse) => {
+              this.systemResps?.push(data);
+            }, 
+            error: (err: HttpErrorResponse) => {
+              console.log(err.message);
+            }
+          })
         }
       }
     });
