@@ -5,6 +5,7 @@ import { ConfigService } from 'src/app/services/config.service';
 import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { SystemStatusRequest } from '../models/system-status-request';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,12 @@ export class SystemService {
     return this.http.get<SystemStatusResponse>(ConfigService.config.apiBaseUrl + '/systemstatus/' + id)
       .pipe(
         catchError(this.errHandler.handleError("getSystem", this.system, "Unable to get system from backend"))
+      );
+  }
+  saveSystem(system: SystemStatusRequest) : Observable<SystemStatusResponse> {
+    return this.http.post<SystemStatusResponse>(ConfigService.config.apiBaseUrl + '/systemstatus', system)
+      .pipe(
+        catchError(this.errHandler.handleError("saveSystem", this.system, "Unablet to save system to database"))
       );
   }
 }
