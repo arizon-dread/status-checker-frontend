@@ -64,7 +64,7 @@ export class SystemsComponent implements OnInit {
             error: (err: HttpErrorResponse) => {
               console.log(err.message);
             }
-          })
+          });
         }
       }
     });
