@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
-import { SettingsComponent } from './settings/settings.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ConfigService } from './services/config.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -23,7 +22,6 @@ function appConfigInit(appConfigService: ConfigService): () => Observable<any> {
 @NgModule({
   declarations: [
     AppComponent,
-    SettingsComponent,
 
   ],
   imports: [
